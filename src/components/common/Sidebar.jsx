@@ -5,16 +5,26 @@ import {
   UserCog,
   Database,
   AlertTriangle,
-  Shield,
+  Users,
+  LogOut,
 } from "lucide-react";
 import DropdownModal from "./DropdownModal";
+import { useAuth } from "../../auth/AuthContext";
 
 const Sidebar = () => {
   const [activeModal, setActiveModal] = useState(null);
-  const adminButtonRef = useRef(null);
+  const userButtonRef = useRef(null);
   const configButtonRef = useRef(null);
+  const { currentUser, logout, switchUser, getRoleDisplayName, mockUsers } =
+    useAuth();
 
-  const adminButtons = [
+  const userButtons = [
+    {
+      id: "profile",
+      label: "Ver Perfil",
+      icon: User,
+      onClick: () => console.log("Ver perfil clicked"),
+    },
     {
       id: "manage-account",
       label: "Gestionar Cuenta",
@@ -22,10 +32,27 @@ const Sidebar = () => {
       onClick: () => console.log("Manage account clicked"),
     },
     {
+      id: "switch-user",
+      label: "Cambiar Usuario (Demo)",
+      icon: Users,
+      onClick: () => {
+        const usernames = mockUsers.map((u) => u.username);
+        const selectedUser = prompt(
+          `Cambiar a usuario:\n${usernames.join("\n")}\n\nIngrese username:`
+        );
+        if (selectedUser && switchUser(selectedUser)) {
+          console.log(`Switched to user: ${selectedUser}`);
+        }
+      },
+    },
+    {
       id: "close-session",
       label: "Cerrar Sesión",
-      icon: Shield,
-      onClick: () => console.log("Close session clicked"),
+      icon: LogOut,
+      onClick: () => {
+        logout();
+        console.log("Session closed");
+      },
     },
   ];
 
@@ -52,6 +79,28 @@ const Sidebar = () => {
     setActiveModal(null);
   };
 
+  if (!currentUser) {
+    return (
+      <aside className="w-64 bg-clinic-light-blue text-white shadow-lg flex flex-col">
+        <div className="flex-1 p-6">
+          <div className="bg-clinic-blue rounded-lg p-4 mb-6">
+            <h2 className="text-xl font-bold text-center">
+              CLINICA
+              <br />
+              <span className="text-red-400">ALVAREZ</span>
+            </h2>
+            <p className="text-sm text-center mt-2 text-blue-100">
+              Sistema de Atención
+              <br />
+              Primaria en Salud
+            </p>
+          </div>
+          <div className="text-center text-red-200">Usuario no autenticado</div>
+        </div>
+      </aside>
+    );
+  }
+
   return (
     <>
       <aside className="w-64 bg-clinic-light-blue text-white shadow-lg flex flex-col">
@@ -68,16 +117,29 @@ const Sidebar = () => {
               Primaria en Salud
             </p>
           </div>
+
+          <div className="bg-clinic-blue rounded-lg p-4 mb-6">
+            <div className="text-center">
+              <div className="text-sm font-semibold text-blue-100 mb-1">
+                Usuario Actual
+              </div>
+              <div className="text-white font-bold">{currentUser.name}</div>
+              <div className="text-xs text-blue-200 mt-1">
+                {getRoleDisplayName(currentUser.role)}
+              </div>
+            </div>
+          </div>
         </div>
+
         <div className="p-6">
           <nav className="space-y-4">
             <button
-              ref={adminButtonRef}
-              onClick={() => handleModalToggle("admin")}
+              ref={userButtonRef}
+              onClick={() => handleModalToggle("user")}
               className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-blue-400 transition-colors duration-200"
             >
               <User size={20} />
-              <span>Admin</span>
+              <span>{getRoleDisplayName(currentUser.role)}</span>
             </button>
             <button
               ref={configButtonRef}
@@ -92,10 +154,10 @@ const Sidebar = () => {
       </aside>
 
       <DropdownModal
-        isOpen={activeModal === "admin"}
+        isOpen={activeModal === "user"}
         onClose={closeModal}
-        triggerRef={adminButtonRef}
-        buttons={adminButtons}
+        triggerRef={userButtonRef}
+        buttons={userButtons}
       />
 
       <DropdownModal
