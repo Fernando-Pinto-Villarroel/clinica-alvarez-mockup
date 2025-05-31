@@ -1,7 +1,7 @@
 {
   "name": "my-v0-project",
   "version": "0.1.0",
-  "private": true,
+  "homepage": "https://Fernando-Pinto-Villarroel.github.io/clinica-alvarez-mockup",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
