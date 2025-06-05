@@ -16,7 +16,7 @@ export const ROLE_PERMISSIONS = {
       "patients",
       "medical-consultations",
       "services",
-      "pharmaceutical-supplies",
+      "nursing",
     ],
     actions: {
       personnel: ["create", "list", "update", "delete"],
@@ -34,7 +34,7 @@ export const ROLE_PERMISSIONS = {
       patients: ["create", "list", "update", "delete"],
       "medical-consultations": ["create", "list", "update", "delete"],
       services: ["create", "list", "update", "delete"],
-      "pharmaceutical-supplies": ["create", "list", "update", "delete"],
+      nursing: ["create", "list", "update", "delete"],
     },
   },
   [ROLES.RECEPCIONISTA]: {
@@ -53,9 +53,9 @@ export const ROLE_PERMISSIONS = {
     },
   },
   [ROLES.FARMACEUTICO]: {
-    modules: ["pharmaceutical-supplies"],
+    modules: ["nursing"],
     actions: {
-      "pharmaceutical-supplies": ["create", "list", "update", "delete"],
+      nursing: ["create", "list", "update", "delete"],
     },
   },
   [ROLES.ENFERMERIA]: {

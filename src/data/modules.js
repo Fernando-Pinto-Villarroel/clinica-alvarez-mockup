@@ -24,14 +24,14 @@ export const modules = [
     ],
   },
   {
-    id: "pharmaceutical-supplies",
-    title: "Insumos Farmacéuticos",
+    id: "nursing",
+    title: "Enfermería",
     icon: Pill,
     actions: [
-      { id: "create", label: "Registrar Insumo", icon: Plus },
-      { id: "update", label: "Actualizar Insumo", icon: Edit },
-      { id: "list", label: "Ver Insumos", icon: List },
-      { id: "delete", label: "Eliminar Insumo", icon: X },
+      { id: "create", label: "Registrar Paciente en Camilla", icon: Plus },
+      { id: "update", label: "Actualizar Paciente en Camilla", icon: Edit },
+      { id: "list", label: "Ver Pacientes en Camillas", icon: List },
+      { id: "delete", label: "Desocupar Paciente en Camilla", icon: X },
     ],
   },
   {
@@ -91,15 +91,15 @@ export const modules = [
       { id: "list-expense", label: "Ver Egresos Económicos", icon: List },
     ],
   },
-  {
-    id: "users",
-    title: "Usuarios",
-    icon: User,
-    actions: [
-      { id: "create", label: "Registrar Usuario", icon: Plus },
-      { id: "update", label: "Actualizar Usuario", icon: Edit },
-      { id: "list", label: "Ver Usuarios", icon: List },
-      { id: "delete", label: "Eliminar Usuario", icon: X },
-    ],
-  },
+  // {
+  //   id: "users",
+  //   title: "Usuarios",
+  //   icon: User,
+  //   actions: [
+  //     { id: "create", label: "Registrar Usuario", icon: Plus },
+  //     { id: "update", label: "Actualizar Usuario", icon: Edit },
+  //     { id: "list", label: "Ver Usuarios", icon: List },
+  //     { id: "delete", label: "Eliminar Usuario", icon: X },
+  //   ],
+  // },
 ];

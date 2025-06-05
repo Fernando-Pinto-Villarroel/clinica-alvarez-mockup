@@ -4,11 +4,10 @@ const ModuleNavigation = ({ activeModule, onModuleChange }) => {
   const { hasModuleAccess, getAccessibleModules } = useAuth();
 
   const allModules = [
-    { id: "users", label: "Usuarios" },
     { id: "accounting", label: "Contabilidad" },
     { id: "patients", label: "Pacientes" },
     { id: "services", label: "Servicios de la Clínica" },
-    { id: "pharmaceutical-supplies", label: "Insumos Farmacéuticos" },
+    { id: "nursing", label: "Enfermería" },
     { id: "medical-consultations", label: "Consultas Médicas" },
     { id: "personnel", label: "Gestión de Personal (RRHH)" },
   ];
