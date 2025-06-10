@@ -60,10 +60,30 @@ export const modules = [
     title: "Pacientes",
     icon: UserPlus,
     actions: [
-      { id: "create", label: "Registrar Paciente", icon: Plus },
-      { id: "update", label: "Actualizar Información de Paciente", icon: Edit },
-      { id: "list", label: "Ver Pacientes y sus Historiales", icon: List },
-      { id: "delete", label: "Eliminar Paciente", icon: X },
+      {
+        id: "create",
+        label: "Registrar Paciente",
+        icon: Plus,
+        component: "PatientForm",
+      },
+      {
+        id: "update",
+        label: "Actualizar Información de Paciente",
+        icon: Edit,
+        component: "PatientList",
+      },
+      {
+        id: "list",
+        label: "Ver Pacientes y sus Historiales",
+        icon: List,
+        component: "PatientList",
+      },
+      {
+        id: "delete",
+        label: "Eliminar Paciente",
+        icon: X,
+        component: "PatientList",
+      },
     ],
   },
   {
@@ -71,35 +91,42 @@ export const modules = [
     title: "Contabilidad",
     icon: Calculator,
     actions: [
-      { id: "create-income", label: "Registrar Ingreso Económico", icon: Plus },
+      {
+        id: "create-income",
+        label: "Registrar Ingreso Económico",
+        icon: Plus,
+        component: "IncomeForm",
+      },
       {
         id: "update-income",
         label: "Actualizar Ingreso Económico",
         icon: Edit,
+        component: "IncomeList",
       },
-      { id: "list-income", label: "Ver Ingresos Económicos", icon: List },
+      {
+        id: "list-income",
+        label: "Ver Ingresos Económicos",
+        icon: List,
+        component: "IncomeList",
+      },
       {
         id: "create-expense",
         label: "Registrar Egreso Económico",
         icon: Plus,
+        component: "ExpenseForm",
       },
       {
         id: "update-expense",
         label: "Actualizar Egreso Económico",
         icon: Edit,
+        component: "ExpenseList",
       },
-      { id: "list-expense", label: "Ver Egresos Económicos", icon: List },
+      {
+        id: "list-expense",
+        label: "Ver Egresos Económicos",
+        icon: List,
+        component: "ExpenseList",
+      },
     ],
   },
-  // {
-  //   id: "users",
-  //   title: "Usuarios",
-  //   icon: User,
-  //   actions: [
-  //     { id: "create", label: "Registrar Usuario", icon: Plus },
-  //     { id: "update", label: "Actualizar Usuario", icon: Edit },
-  //     { id: "list", label: "Ver Usuarios", icon: List },
-  //     { id: "delete", label: "Eliminar Usuario", icon: X },
-  //   ],
-  // },
 ];

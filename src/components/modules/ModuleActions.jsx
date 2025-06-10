@@ -1,9 +1,14 @@
+import { useState } from "react";
 import { modules } from "../../data/modules.js";
 import { useAuth } from "../../auth/AuthContext";
+import ComponentRenderer from "./ComponentRenderer";
 
 const ModuleActions = ({ moduleId }) => {
+  const [activeComponent, setActiveComponent] = useState(null);
+  const [selectedAction, setSelectedAction] = useState(null);
   const { hasModuleAccess, hasActionAccess, currentUser, getRoleDisplayName } =
     useAuth();
+
   const module = modules.find((m) => m.id === moduleId);
 
   if (!hasModuleAccess(moduleId)) {
@@ -62,6 +67,43 @@ const ModuleActions = ({ moduleId }) => {
     );
   }
 
+  const handleActionClick = (action) => {
+    setSelectedAction(action);
+    setActiveComponent(action.component || null);
+  };
+
+  const handleBack = () => {
+    setActiveComponent(null);
+    setSelectedAction(null);
+  };
+
+  if (activeComponent) {
+    return (
+      <div className="bg-white rounded-lg shadow-lg mx-8 my-6">
+        <div className="p-6 border-b border-gray-200">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-gray-800">
+              {selectedAction?.label}
+            </h2>
+            <button
+              onClick={handleBack}
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+            >
+              Volver
+            </button>
+          </div>
+        </div>
+        <div className="p-6">
+          <ComponentRenderer
+            componentName={activeComponent}
+            action={selectedAction}
+            moduleId={moduleId}
+          />
+        </div>
+      </div>
+    );
+  }
+
   const buttonsCount = accessibleActions.length;
   const columnsPerRow = buttonsCount % 3 === 0 ? 3 : 4;
 
@@ -88,11 +130,7 @@ const ModuleActions = ({ moduleId }) => {
           return (
             <button
               key={action.id}
-              onClick={() => {
-                console.log(
-                  `Action ${action.id} clicked for module ${moduleId}`
-                );
-              }}
+              onClick={() => handleActionClick(action)}
               className={`bg-white p-6 rounded-lg border-2 border-gray hover:border-gray-300 transition-all duration-200 transform hover:scale-105 shadow-sm hover:shadow-md w-full max-w-xs`}
             >
               <div className="flex flex-col items-center space-y-3">
