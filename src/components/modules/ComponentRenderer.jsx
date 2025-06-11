@@ -5,8 +5,8 @@ import ExpenseForm from "./accounting/ExpenseForm";
 import ExpenseList from "./accounting/ExpenseList";
 import PatientForm from "./patients/PatientForm";
 import PatientList from "./patients/PatientList";
-import ServiceForm from "./services/ServiceForm";
-import ServiceList from "./services/ServiceList";
+import PersonnelForm from "./personnel/PersonnelForm";
+import PersonnelList from "./personnel/PersonnelList";
 
 const componentMap = {
   IncomeForm,
@@ -15,8 +15,8 @@ const componentMap = {
   ExpenseList,
   PatientForm,
   PatientList,
-  ServiceForm,
-  ServiceList,
+  PersonnelForm,
+  PersonnelList,
 };
 
 const ComponentRenderer = ({ componentName, action, moduleId }) => {
@@ -64,8 +64,8 @@ const ComponentRenderer = ({ componentName, action, moduleId }) => {
         ? ExpenseForm
         : componentName === "PatientList"
         ? PatientForm
-        : componentName === "ServiceList"
-        ? ServiceForm
+        : componentName === "PersonnelList" // Añade esta condición para PersonnelList
+        ? PersonnelForm // Usa el nuevo PersonnelForm
         : Component;
 
     return (
@@ -89,8 +89,8 @@ const ComponentRenderer = ({ componentName, action, moduleId }) => {
           patientToEdit={
             componentName === "PatientList" ? editingItem : undefined
           }
-          serviceToEdit={
-            componentName === "ServiceList" ? editingItem : undefined
+          personnelToEdit={ // Añade esta prop para PersonnelForm
+            componentName === "PersonnelList" ? editingItem : undefined
           }
           onSave={handleSave}
           onCancel={handleCancel}

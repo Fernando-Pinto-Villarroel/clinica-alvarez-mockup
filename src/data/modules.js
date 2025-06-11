@@ -49,10 +49,30 @@ export const modules = [
     title: "Gestión de Personal (RRHH)",
     icon: Users,
     actions: [
-      { id: "create", label: "Registrar Personal", icon: Plus },
-      { id: "update", label: "Actualizar Personal", icon: Edit },
-      { id: "list", label: "Ver Personal", icon: List },
-      { id: "delete", label: "Eliminar Personal", icon: X },
+      {
+        id: "create",
+        label: "Registrar Personal",
+        icon: Plus,
+        component: "PersonnelForm",
+      },
+      {
+        id: "update",
+        label: "Actualizar Personal",
+        icon: Edit,
+        component: "PersonnelList",
+      },
+      {
+        id: "list",
+        label: "Ver Personal",
+        icon: List,
+        component: "PersonnelList",
+      },
+      {
+        id: "delete",
+        label: "Eliminar Personal",
+        icon: X,
+        component: "PersonnelList",
+      },
     ],
   },
   {
