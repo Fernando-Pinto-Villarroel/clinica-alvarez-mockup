@@ -5,8 +5,13 @@ import ExpenseForm from "./accounting/ExpenseForm";
 import ExpenseList from "./accounting/ExpenseList";
 import PatientForm from "./patients/PatientForm";
 import PatientList from "./patients/PatientList";
+<<<<<<< HEAD
 import ServiceForm from "./services/ServiceForm";
 import ServiceList from "./services/ServiceList";
+=======
+import PersonnelForm from "./personnel/PersonnelForm"; // Importa el nuevo componente
+import PersonnelList from "./personnel/PersonnelList"; // Importa el nuevo componente
+>>>>>>> a0c5054 (Personnel Management (HR))
 
 const componentMap = {
   IncomeForm,
@@ -15,8 +20,13 @@ const componentMap = {
   ExpenseList,
   PatientForm,
   PatientList,
+<<<<<<< HEAD
   ServiceForm,
   ServiceList,
+=======
+  PersonnelForm, // Añade el nuevo componente
+  PersonnelList, // Añade el nuevo componente
+>>>>>>> a0c5054 (Personnel Management (HR))
 };
 
 const ComponentRenderer = ({ componentName, action, moduleId }) => {
@@ -64,8 +74,8 @@ const ComponentRenderer = ({ componentName, action, moduleId }) => {
         ? ExpenseForm
         : componentName === "PatientList"
         ? PatientForm
-        : componentName === "ServiceList"
-        ? ServiceForm
+        : componentName === "PersonnelList" // Añade esta condición para PersonnelList
+        ? PersonnelForm // Usa el nuevo PersonnelForm
         : Component;
 
     return (
@@ -89,8 +99,8 @@ const ComponentRenderer = ({ componentName, action, moduleId }) => {
           patientToEdit={
             componentName === "PatientList" ? editingItem : undefined
           }
-          serviceToEdit={
-            componentName === "ServiceList" ? editingItem : undefined
+          personnelToEdit={ // Añade esta prop para PersonnelForm
+            componentName === "PersonnelList" ? editingItem : undefined
           }
           onSave={handleSave}
           onCancel={handleCancel}
