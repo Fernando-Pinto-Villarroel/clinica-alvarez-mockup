@@ -46,6 +46,29 @@ const IncomeList = ({ action, onEdit }) => {
 
   const searchFields = ["description", "payer"];
 
+  const filterConfig = [
+    {
+      name: "transactionType",
+      label: "Tipo de Transacción",
+      options: [
+        { value: "ALL", label: "Todos los Tipos" },
+        { value: "CASH", label: "Efectivo" },
+        { value: "QR", label: "QR" },
+        { value: "TRANSFER", label: "Transferencia" },
+        { value: "CARD", label: "Tarjeta" },
+      ],
+    },
+    {
+      name: "shift",
+      label: "Turno",
+      options: [
+        { value: "ALL", label: "Todos los Turnos" },
+        { value: "DAY", label: "Día" },
+        { value: "NIGHT", label: "Noche" },
+      ],
+    },
+  ];
+
   return (
     <BaseList
       action={action}
@@ -55,6 +78,7 @@ const IncomeList = ({ action, onEdit }) => {
       colorScheme="blue"
       columns={columns}
       searchFields={searchFields}
+      filterConfig={filterConfig}
     />
   );
 };

@@ -18,9 +18,9 @@ export const modules = [
     title: "Servicios",
     icon: Calendar,
     actions: [
-      { id: "create", label: "Programar Servicio", icon: Plus },
+      { id: "create", label: "Programar Servicio", icon: Plus, component: "ServiceForm" },
       { id: "update", label: "Editar Servicio Programado", icon: Edit },
-      { id: "list", label: "Ver Servicios Programados", icon: List },
+      { id: "list", label: "Ver Servicios Programados", icon: List, component: "ServiceList" },
     ],
   },
   {
