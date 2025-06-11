@@ -5,13 +5,8 @@ import ExpenseForm from "./accounting/ExpenseForm";
 import ExpenseList from "./accounting/ExpenseList";
 import PatientForm from "./patients/PatientForm";
 import PatientList from "./patients/PatientList";
-<<<<<<< HEAD
-import ServiceForm from "./services/ServiceForm";
-import ServiceList from "./services/ServiceList";
-=======
-import PersonnelForm from "./personnel/PersonnelForm"; // Importa el nuevo componente
-import PersonnelList from "./personnel/PersonnelList"; // Importa el nuevo componente
->>>>>>> a0c5054 (Personnel Management (HR))
+import PersonnelForm from "./personnel/PersonnelForm";
+import PersonnelList from "./personnel/PersonnelList";
 
 const componentMap = {
   IncomeForm,
@@ -20,13 +15,8 @@ const componentMap = {
   ExpenseList,
   PatientForm,
   PatientList,
-<<<<<<< HEAD
-  ServiceForm,
-  ServiceList,
-=======
-  PersonnelForm, // Añade el nuevo componente
-  PersonnelList, // Añade el nuevo componente
->>>>>>> a0c5054 (Personnel Management (HR))
+  PersonnelForm,
+  PersonnelList,
 };
 
 const ComponentRenderer = ({ componentName, action, moduleId }) => {
