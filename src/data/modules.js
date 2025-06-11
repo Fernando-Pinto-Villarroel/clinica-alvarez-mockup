@@ -5,12 +5,15 @@ import {
   Users,
   UserPlus,
   Calculator,
-  User,
   Plus,
   Edit,
   List,
   X,
-} from "lucide-react";
+  Bed,
+  Search,
+  FileText,
+  Printer,
+} from "lucide-react"
 
 export const modules = [
   {
@@ -28,10 +31,10 @@ export const modules = [
     title: "Enfermería",
     icon: Pill,
     actions: [
-      { id: "create", label: "Registrar Paciente en Camilla", icon: Plus },
-      { id: "update", label: "Actualizar Paciente en Camilla", icon: Edit },
-      { id: "list", label: "Ver Pacientes en Camillas", icon: List },
-      { id: "delete", label: "Desocupar Paciente en Camilla", icon: X },
+      { id: "beds", label: "Gestión de Camas", icon: Bed },
+      { id: "search", label: "Buscar Pacientes", icon: Search },
+      { id: "observations", label: "Observaciones Médicas", icon: FileText },
+      { id: "print", label: "Imprimir Información", icon: Printer },
     ],
   },
   {

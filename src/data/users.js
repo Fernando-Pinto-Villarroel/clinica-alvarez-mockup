@@ -5,19 +5,11 @@ export const ROLES = {
   FARMACEUTICO: "farmaceutico",
   ENFERMERIA: "enfermeria",
   TECNICO: "tecnico",
-};
+}
 
 export const ROLE_PERMISSIONS = {
   [ROLES.ADMINISTRADOR]: {
-    modules: [
-      "personnel",
-      "accounting",
-      "users",
-      "patients",
-      "medical-consultations",
-      "services",
-      "nursing",
-    ],
+    modules: ["personnel", "accounting", "users", "patients", "medical-consultations", "services", "nursing"],
     actions: {
       personnel: ["create", "list", "update", "delete"],
       accounting: [
@@ -59,8 +51,9 @@ export const ROLE_PERMISSIONS = {
     },
   },
   [ROLES.ENFERMERIA]: {
-    modules: ["services"],
+    modules: ["nursing", "services"], 
     actions: {
+      nursing: ["beds", "search", "observations", "print"],
       services: ["create", "list", "update"],
     },
   },
@@ -70,7 +63,7 @@ export const ROLE_PERMISSIONS = {
       services: ["list", "update"],
     },
   },
-};
+}
 
 export const MOCK_USERS = [
   {
@@ -99,4 +92,4 @@ export const MOCK_USERS = [
   },
   { id: 5, username: "enf1", name: "Carmen Enfermera", role: ROLES.ENFERMERIA },
   { id: 6, username: "tec1", name: "Pedro Técnico", role: ROLES.TECNICO },
-];
+]
