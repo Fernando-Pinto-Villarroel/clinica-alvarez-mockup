@@ -33,18 +33,18 @@ export const modules = [
     actions: [
       { id: "beds", label: "Gestión de Camas", icon: Bed },
       { id: "search", label: "Buscar Pacientes", icon: Search },
-      { id: "observations", label: "Observaciones Médicas", icon: FileText },
+      { id: "observations", label: "Observaciones Médicas", icon: FileText, component: "PatientObservations" },
       { id: "print", label: "Imprimir Información", icon: Printer },
     ],
   },
   {
     id: "medical-consultations",
-    title: "Consultas Médicas",
+    title: "Medico",
     icon: Stethoscope,
     actions: [
       { id: "create", label: "Programar Consulta", icon: Plus },
-      { id: "update", label: "Editar Consulta Programada", icon: Edit },
-      { id: "list", label: "Ver Consultas Programadas", icon: List },
+      { id: "update", label: "Registrar Evolución y Diagnóstico", icon: Edit, component: "PatientObservations" },
+      { id: "list", label: "Ver Pacientes Agendados", icon: List, component: "PatientList" },
     ],
   },
   {
@@ -80,7 +80,7 @@ export const modules = [
   },
   {
     id: "patients",
-    title: "Pacientes",
+    title: "Recepción",
     icon: UserPlus,
     actions: [
       {

@@ -1,6 +1,10 @@
 import BaseList from "../BaseList";
+import { useAuth } from "../../../auth/AuthContext";
 
 const PatientList = ({ action, onEdit }) => {
+  const { currentUser } = useAuth();
+  const isDoctor = currentUser.role === 'medico';
+
   const initialData = [
     {
       id: 1,
@@ -15,9 +19,11 @@ const PatientList = ({ action, onEdit }) => {
       category: "A",
       address: "Zona Norte",
       description: "Paciente: SANTOS ALVARO",
+      service: "Consulta General",
       amount: 0,
       transactionType: "CASH",
       shift: "DAY",
+      registeredBy: "recep1"
     },
     {
       id: 2,
@@ -32,71 +38,27 @@ const PatientList = ({ action, onEdit }) => {
       category: "B",
       address: "Zona Sur",
       description: "Paciente: JUAN PABLO TRUJILLO",
+      service: "Emergencia",
       amount: 0,
       transactionType: "CASH",
       shift: "DAY",
-    },
-    {
-      id: 3,
-      date: "2023-07-02",
-      firstName: "ABEL",
-      lastName: "MAMANI",
-      motherLastName: "VALENCIA",
-      fullName: "ABEL MAMANI VALENCIA",
-      identityCard: "5302925",
-      phone: "72920726",
-      bloodType: "O+",
-      category: "A",
-      address: "Villa Tunari",
-      description: "Paciente: ABEL MAMANI",
-      amount: 0,
-      transactionType: "CASH",
-      shift: "DAY",
-    },
-    {
-      id: 4,
-      date: "2023-07-02",
-      firstName: "TIBUR",
-      lastName: "QUELCA",
-      motherLastName: "SOLIZ",
-      fullName: "TIBUR QUELCA SOLIZ",
-      identityCard: "5938119",
-      phone: "71475386",
-      bloodType: "O+",
-      category: "C",
-      address: "Kanata",
-      description: "Paciente: TIBUR QUELCA",
-      amount: 0,
-      transactionType: "CASH",
-      shift: "DAY",
-    },
-    {
-      id: 5,
-      date: "2023-07-02",
-      firstName: "GONZALES",
-      lastName: "CANALES",
-      motherLastName: "RAMIREZ",
-      fullName: "GONZALES CANALES RAMIREZ",
-      identityCard: "8816044",
-      phone: "69545349",
-      bloodType: "O+",
-      category: "M",
-      address: "Cercado",
-      description: "Paciente: GONZALES CANALES",
-      amount: 0,
-      transactionType: "CASH",
-      shift: "DAY",
+      registeredBy: "admin"
     },
   ];
 
-  const columns = [
+  const columnsForDoctor = [
     { field: "date", label: "Fecha", type: "date" },
+    { field: "fullName", label: "Nombre Completo", type: "text" },
+    { field: "service", label: "Servicio Agendado", type: "text" },
+  ];
+
+  const columnsForReception = [
+    { field: "date", label: "Fecha de Registro", type: "date" },
     { field: "fullName", label: "Nombre Completo", type: "text" },
     { field: "identityCard", label: "Carnet", type: "text" },
     { field: "phone", label: "Teléfono", type: "text" },
-    { field: "bloodType", label: "Grupo Sanguíneo", type: "text" },
-    { field: "category", label: "Categoría", type: "text" },
-    { field: "address", label: "Dirección", type: "text" },
+    { field: "service", label: "Servicio Agendado", type: "text" },
+    { field: "registeredBy", label: "Registrado Por", type: "text" },
   ];
 
   const searchFields = [
@@ -107,6 +69,18 @@ const PatientList = ({ action, onEdit }) => {
     "phone",
   ];
 
+  const filterConfig = [
+    {
+      name: "registeredBy",
+      label: "Registrado Por",
+      options: [
+        { value: "ALL", label: "Todos" },
+        { value: "recep1", label: "Ana Receptionist" },
+        { value: "admin", label: "Admin" },
+      ],
+    },
+  ];
+
   return (
     <BaseList
       action={action}
@@ -114,8 +88,9 @@ const PatientList = ({ action, onEdit }) => {
       initialData={initialData}
       entityType="Paciente"
       colorScheme="blue"
-      columns={columns}
+      columns={isDoctor ? columnsForDoctor : columnsForReception}
       searchFields={searchFields}
+      filterConfig={isDoctor ? [] : filterConfig}
     />
   );
 };

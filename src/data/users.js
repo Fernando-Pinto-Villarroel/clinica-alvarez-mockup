@@ -30,18 +30,17 @@ export const ROLE_PERMISSIONS = {
     },
   },
   [ROLES.RECEPCIONISTA]: {
-    modules: ["patients", "medical-consultations", "services"],
+    modules: ["patients", "accounting"],
     actions: {
-      patients: ["create", "list", "update", "delete"],
-      "medical-consultations": ["create", "list"],
-      services: ["create", "list"],
+      patients: ["create", "list"],
+      accounting: ["list-income", "list-expense"],
     },
   },
   [ROLES.MEDICO]: {
-    modules: ["medical-consultations", "services"],
+    modules: ["medical-consultations", "nursing"],
     actions: {
-      "medical-consultations": ["create", "list", "update"],
-      services: ["create", "list"],
+      "medical-consultations": ["list", "update"],
+      nursing: ["observations"],
     },
   },
   [ROLES.FARMACEUTICO]: {
