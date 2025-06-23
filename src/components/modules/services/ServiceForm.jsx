@@ -1,73 +1,41 @@
-import BaseForm from "../BaseForm";
+import { useState } from "react";
+import ServiceFormRouter from "./ServiceFormRouter";
 
-const ServiceForm = ({ action, serviceToEdit, onSave, onCancel }) => {
-    const fields = {
-        patientName: {
-            label: "Nombre del Paciente",
-            type: "text",
-            required: true,
-        },
-        serviceType: {
-            label: "Tipo de Servicio",
-            type: "select",
-            options: [
-            { value: "hemograma", label: "Hemograma Completo" },
-            { value: "glucosa", label: "Glucosa" },
-            { value: "colesterol", label: "Perfil Lipídico" },
-            { value: "rayos_x", label: "Rayos X - Tórax" },
-            { value: "ecografia_abdominal", label: "Ecografía Abdominal" },
-            { value: "internacion", label: "Internación" },
-            ],
-            required: true,
-        },
-        doctor: {
-            label: "Médico Solicitante",
-            type: "text",
-            required: false,
-        },
-        date: {
-            label: "Fecha del Servicio",
-            type: "date",
-            required: true,
-        },
-        status: {
-            label: "Estado",
-            type: "select",
-            options: [
-            { value: "Pendiente", label: "Pendiente" },
-            { value: "Completado", label: "Completado" },
-            { value: "Cancelado", label: "Cancelado" },
-            ],
-            required: true,
-        },
-        observations: {
-            label: "Observaciones",
-            type: "textarea",
-            required: false,
-        },
-    };
+export default function ServiceForm(props) {
+  const [selectedType, setSelectedType] = useState("");
 
-
-    const defaultValues = {
-        patientName: "",
-        serviceType: "",
-        doctor: "",
-        date: new Date().toISOString().split("T")[0],
-        status: "Pendiente",
-        observations: "",
-    };
-
+  if (!selectedType) {
     return (
-        <BaseForm
-            itemToEdit={serviceToEdit}
-            onSave={onSave}
-            onCancel={onCancel}
-            fields={fields}
-            entityType="Servicio"
-            colorScheme="green"
-            defaultValues={defaultValues}
-        />
+      <div style={{ maxWidth: 400, margin: "2rem auto", padding: 24, borderRadius: 8, boxShadow: "0 2px 8px #0002", background: "#fff" }}>
+        <label style={{ fontSize: "1.2rem", fontWeight: "bold", marginBottom: 12, display: "block" }}>
+          Seleccione el tipo de servicio:
+        </label>
+        <select
+          value={selectedType}
+          onChange={e => setSelectedType(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "0.75rem",
+            fontSize: "1.1rem",
+            borderRadius: 6,
+            border: "1px solid #bbb",
+            marginBottom: 8,
+            background: "#f9f9f9"
+          }}
+        >
+          <option value="" disabled style={{ color: "#888", fontSize: "1.1rem" }}>
+            -- Seleccione un servicio --
+          </option>
+          <option value="rayos_x">Rayos X</option>
+          <option value="tomografia">Tomografía Computada (TAC)</option>
+          <option value="ecografia">Ecografía</option>
+          <option value="laboratorio">Laboratorio</option>
+          <option value="ecg">Electrocardiograma (ECG)</option>
+          <option value="mamografia">Mamografía</option>
+        </select>
+      </div>
     );
-};
+  }
 
-export default ServiceForm;
+  return <ServiceFormRouter serviceType={selectedType} {...props} />;
+}

@@ -7,6 +7,8 @@ import PatientForm from "./patients/PatientForm";
 import PatientList from "./patients/PatientList";
 import PersonnelForm from "./personnel/PersonnelForm";
 import PersonnelList from "./personnel/PersonnelList";
+import ServiceForm from "./services/ServiceForm";
+import ServiceList from "./services/ServiceList";
 
 const componentMap = {
   IncomeForm,
@@ -17,6 +19,8 @@ const componentMap = {
   PatientList,
   PersonnelForm,
   PersonnelList,
+  ServiceForm,
+  ServiceList,
 };
 
 const ComponentRenderer = ({ componentName, action, moduleId }) => {
@@ -65,7 +69,9 @@ const ComponentRenderer = ({ componentName, action, moduleId }) => {
         : componentName === "PatientList"
         ? PatientForm
         : componentName === "PersonnelList" // Añade esta condición para PersonnelList
-        ? PersonnelForm // Usa el nuevo PersonnelForm
+        ? PersonnelForm
+        : componentName === "ServiceList"
+        ? ServiceForm
         : Component;
 
     return (
@@ -91,6 +97,9 @@ const ComponentRenderer = ({ componentName, action, moduleId }) => {
           }
           personnelToEdit={ // Añade esta prop para PersonnelForm
             componentName === "PersonnelList" ? editingItem : undefined
+          }
+          serviceToEdit={
+            componentName === "ServiceList" ? editingItem : undefined
           }
           onSave={handleSave}
           onCancel={handleCancel}
