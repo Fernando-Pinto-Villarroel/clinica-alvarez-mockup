@@ -9,6 +9,7 @@ import PersonnelForm from "./personnel/PersonnelForm";
 import PersonnelList from "./personnel/PersonnelList";
 import ServiceForm from "./services/ServiceForm";
 import ServiceList from "./services/ServiceList";
+import DoctorDashboard from "./medical/DoctorDashboard";
 
 const componentMap = {
   IncomeForm,
@@ -21,11 +22,17 @@ const componentMap = {
   PersonnelList,
   ServiceForm,
   ServiceList,
+  DoctorDashboard,
 };
 
 const ComponentRenderer = ({ componentName, action, moduleId }) => {
   const [editingItem, setEditingItem] = useState(null);
   const [showForm, setShowForm] = useState(false);
+
+  if (moduleId === 'medical-consultations') {
+    const DoctorComponent = componentMap['DoctorDashboard'];
+    return <DoctorComponent />;
+  }
 
   const Component = componentMap[componentName];
 
@@ -68,7 +75,7 @@ const ComponentRenderer = ({ componentName, action, moduleId }) => {
         ? ExpenseForm
         : componentName === "PatientList"
         ? PatientForm
-        : componentName === "PersonnelList" // Añade esta condición para PersonnelList
+        : componentName === "PersonnelList"
         ? PersonnelForm
         : componentName === "ServiceList"
         ? ServiceForm
@@ -95,7 +102,7 @@ const ComponentRenderer = ({ componentName, action, moduleId }) => {
           patientToEdit={
             componentName === "PatientList" ? editingItem : undefined
           }
-          personnelToEdit={ // Añade esta prop para PersonnelForm
+          personnelToEdit={
             componentName === "PersonnelList" ? editingItem : undefined
           }
           serviceToEdit={
