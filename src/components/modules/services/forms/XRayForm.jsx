@@ -34,10 +34,14 @@ const XRayForm = ({ serviceToEdit, onSave, onCancel }) => {
     technicalNotes: "",
   };
 
+  const handleSave = (data) => {
+    onSave({ ...data, serviceType: "rayos_x" });
+  };
+
   return (
     <BaseForm
       itemToEdit={serviceToEdit}
-      onSave={onSave}
+      onSave={handleSave}
       onCancel={onCancel}
       fields={fields}
       entityType="Rayos X"

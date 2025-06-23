@@ -5,7 +5,7 @@ const ServiceList = ({ action, onEdit }) => {
     {
       id: 1,
       date: "2024-06-01",
-      serviceType: "Hemograma Completo",
+      serviceType: "laboratorio", // <--- CLAVE CORRECTA
       patientName: "Juan Pérez",
       doctor: "Dr. Ramírez",
       status: "Pendiente",
@@ -13,7 +13,7 @@ const ServiceList = ({ action, onEdit }) => {
     {
       id: 2,
       date: "2024-06-03",
-      serviceType: "Rayos X - Tórax",
+      serviceType: "rayos_x", // <--- CLAVE CORRECTA
       patientName: "Ana Gómez",
       doctor: "Dra. Ledezma",
       status: "Completado",
@@ -21,7 +21,7 @@ const ServiceList = ({ action, onEdit }) => {
     {
       id: 3,
       date: "2024-06-05",
-      serviceType: "Ecografía Abdominal",
+      serviceType: "ecografia", // <--- CLAVE CORRECTA
       patientName: "Carlos Fernández",
       doctor: "Dr. Quiroga",
       status: "Pendiente",

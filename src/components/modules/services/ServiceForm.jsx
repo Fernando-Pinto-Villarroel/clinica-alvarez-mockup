@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ServiceFormRouter from "./ServiceFormRouter";
 
 export default function ServiceForm(props) {
   const [selectedType, setSelectedType] = useState("");
 
-  if (!selectedType) {
+  useEffect(() => {
+    if (props.serviceToEdit && props.serviceToEdit.serviceType) {
+      setSelectedType(props.serviceToEdit.serviceType);
+    }
+  }, [props.serviceToEdit]);
+
+  if (!selectedType && !props.serviceToEdit) {
     return (
       <div style={{ maxWidth: 400, margin: "2rem auto", padding: 24, borderRadius: 8, boxShadow: "0 2px 8px #0002", background: "#fff" }}>
         <label style={{ fontSize: "1.2rem", fontWeight: "bold", marginBottom: 12, display: "block" }}>
@@ -37,5 +43,11 @@ export default function ServiceForm(props) {
     );
   }
 
-  return <ServiceFormRouter serviceType={selectedType} {...props} />;
+  return (
+    <ServiceFormRouter
+      serviceType={selectedType}
+      serviceToEdit={props.serviceToEdit}
+      {...props}
+    />
+  );
 }

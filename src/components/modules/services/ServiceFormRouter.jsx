@@ -14,7 +14,12 @@ const formMap = {
   mamografia: MammographyForm,
 };
 
-export default function ServiceFormRouter({ serviceType, ...props }) {
-  const FormComponent = formMap[serviceType] || null;
-  return FormComponent ? <FormComponent {...props} /> : <div>Seleccione un tipo de servicio válido.</div>;
+export default function ServiceFormRouter({ serviceType, serviceToEdit, ...props }) {
+  const type = serviceType || serviceToEdit?.serviceType;
+  const FormComponent = formMap[type] || null;
+  return FormComponent ? (
+    <FormComponent serviceToEdit={serviceToEdit} {...props} />
+  ) : (
+    <div>Seleccione un tipo de servicio válido.</div>
+  );
 }

@@ -22,7 +22,7 @@ export const modules = [
     icon: Calendar,
     actions: [
       { id: "create", label: "Programar Servicio", icon: Plus, component: "ServiceForm" },
-      { id: "update", label: "Editar Servicio Programado", icon: Edit },
+      { id: "update", label: "Editar Servicio Programado", icon: Edit, component: "ServiceList" },
       { id: "list", label: "Ver Servicios Programados", icon: List, component: "ServiceList" },
     ],
   },
