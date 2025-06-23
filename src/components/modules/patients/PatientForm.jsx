@@ -1,15 +1,27 @@
-import { User, Phone, CreditCard, MapPin } from "lucide-react";
+import { User, Phone, Briefcase, MapPin, Calendar, Edit, DollarSign } from "lucide-react";
 import BaseForm from "../BaseForm";
-import { useAuth } from "../../../auth/AuthContext";
 
 const PatientForm = ({ action, patientToEdit, onSave, onCancel }) => {
-  const { currentUser } = useAuth();
-
-  const isReceptionist = currentUser.role === 'recepcionista';
-
   const fields = {
-    date: {
-      label: "Fecha de Registro",
+    specialty: {
+      label: "Especialidad o Motivo de Consulta",
+      type: "textarea",
+      icon: Edit,
+      required: true,
+      placeholder: "Describa la especialidad o el motivo principal de la visita...",
+    },
+    birthDate: {
+      label: "Fecha de Nacimiento",
+      type: "date",
+      icon: Calendar,
+      required: true,
+    },
+    birthPlace: {
+        label: "Lugar de Nacimiento",
+        type: "text",
+        icon: MapPin,
+        required: true,
+        placeholder: "Ej: Cochabamba, Bolivia",
     },
     firstName: {
       label: "Nombres",
@@ -32,75 +44,43 @@ const PatientForm = ({ action, patientToEdit, onSave, onCancel }) => {
       required: true,
       placeholder: "Apellido materno",
     },
-    ...( !isReceptionist && {
-      identityCard: {
-        label: "Carnet de Identidad",
-        type: "text",
-        icon: CreditCard,
-        required: true,
-        placeholder: "Número de carnet",
-      },
-      phone: {
-        label: "Teléfono",
-        type: "tel",
-        icon: Phone,
-        required: true,
-        placeholder: "Número de teléfono",
-      },
-      bloodType: {
-        label: "Grupo Sanguíneo",
+    transactionType: {
+        label: "¿Cómo canceló?",
         type: "select",
+        icon: DollarSign,
         required: true,
         options: [
-          { value: "O+", label: "O+" },
-          { value: "O-", label: "O-" },
-          { value: "A+", label: "A+" },
-          { value: "A-", label: "A-" },
-          { value: "B+", label: "B+" },
-          { value: "B-", label: "B-" },
-          { value: "AB+", label: "AB+" },
-          { value: "AB-", label: "AB-" },
+            { value: "CASH", label: "Efectivo" },
+            { value: "QR", label: "QR" },
+            { value: "TRANSFER", label: "Transferencia" },
+            { value: "CARD", label: "Tarjeta" },
         ],
-      },
-      category: {
-        label: "Categoría",
-        type: "select",
+    },
+    amount: {
+        label: "Monto Pagado (Bs.)",
+        type: "number",
+        icon: DollarSign,
         required: true,
-        options: [
-          { value: "A", label: "A" },
-          { value: "B", label: "B" },
-          { value: "C", label: "C" },
-          { value: "D", label: "D" },
-          { value: "M", label: "M" },
-        ],
-      },
-      address: {
-        label: "Dirección",
-        type: "text",
-        icon: MapPin,
-        required: false,
-        placeholder: "Dirección del paciente",
-      },
-    })
+        placeholder: "0.00",
+    },
   };
 
   const defaultValues = {
     firstName: "",
     lastName: "",
     motherLastName: "",
-    identityCard: "",
-    phone: "",
-    bloodType: "O+",
-    category: "A",
-    address: "",
+    birthDate: "",
+    birthPlace: "",
+    specialty: "",
+    transactionType: "CASH",
+    amount: "",
   };
 
   const handleSave = (data) => {
     const patientData = {
       ...data,
       fullName: `${data.firstName} ${data.lastName} ${data.motherLastName}`,
-      description: `Paciente: ${data.firstName} ${data.lastName}`,
-      historyNumber: `HC-${Date.now().toString().slice(-4)}` 
+      description: data.specialty,
     };
     onSave(patientData);
   };
