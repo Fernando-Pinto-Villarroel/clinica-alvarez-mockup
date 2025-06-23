@@ -8,20 +8,28 @@ const PatientList = ({ action, onEdit }) => {
   const patientData = [
     {
       id: 1,
-      date: "2023-07-02",
+      date: "2025-06-23",
       fullName: "SANTOS ALVARO MAMANI",
       identityCard: "5190677",
       phone: "79720666",
-      service: "Consulta General",
+      birthDate: "1985-10-20",
+      birthPlace: "Cochabamba, Bolivia",
+      specialty: "Control anual de presión arterial.",
+      transactionType: "CASH",
+      amount: 150.00, 
       registeredBy: "recep1"
     },
     {
       id: 2,
-      date: "2023-07-02",
+      date: "2025-06-22",
       fullName: "JUAN PABLO TRUJILLO ARCE",
       identityCard: "9416228",
       phone: "77441020",
-      service: "Emergencia",
+      birthDate: "1992-05-15",
+      birthPlace: "La Paz, Bolivia",
+      specialty: "Paciente con síntomas de gripe.",
+      transactionType: "QR",
+      amount: 100.00, 
       registeredBy: "admin"
     },
   ];
@@ -56,13 +64,14 @@ const PatientList = ({ action, onEdit }) => {
   const columnsForReception = [
     { field: "date", label: "Fecha de Registro", type: "date" },
     { field: "fullName", label: "Nombre Completo", type: "text" },
-    { field: "identityCard", label: "Carnet", type: "text" },
     { field: "phone", label: "Teléfono", type: "text" },
-    { field: "service", label: "Servicio Agendado", type: "text" },
+    { field: "specialty", label: "Motivo de Consulta", type: "text" },
+    { field: "amount", label: "Monto (Bs.)", type: "amount" },
+    { field: "transactionType", label: "Método de Pago", type: "text" },
     { field: "registeredBy", label: "Registrado Por", type: "text" },
   ];
 
-  const searchFields = ["fullName", "identityCard", "phone", "service", "specialty", "description"];
+  const searchFields = ["fullName", "identityCard", "phone", "specialty", "description"];
 
   const filterConfig = [
     {

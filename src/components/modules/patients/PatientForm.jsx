@@ -10,6 +10,20 @@ const PatientForm = ({ action, patientToEdit, onSave, onCancel }) => {
       required: true,
       placeholder: "Describa la especialidad o el motivo principal de la visita...",
     },
+    identityCard: {
+      label: "Carnet de Identidad",
+      type: "text",
+      icon: User,
+      required: true,
+      placeholder: "Ej: 1234567",
+    },
+    phone: {
+      label: "Teléfono",
+      type: "text",
+      icon: Phone,
+      required: true,
+      placeholder: "Ej: 79720666",
+    },
     birthDate: {
       label: "Fecha de Nacimiento",
       type: "date",
