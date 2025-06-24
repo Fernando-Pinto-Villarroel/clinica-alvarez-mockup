@@ -6,12 +6,13 @@ import PatientSearch from "./patient-search"
 import FloorBeds from "./floor-beds"
 import PatientObservations from "./patient-observations"
 import DatePicker from "./date-picker"
+import PharmacySupplies from "../pharmacy/pharmacy-supplies"
 import { useAuth } from "../../../auth/AuthContext"
 
 export default function NursingModule() {
   const { currentUser, getRoleDisplayName } = useAuth()
-  const [activeTab, setActiveTab] = useState("floor-management")
-  const [activeFloor, setActiveFloor] = useState(0) // Estado para manejar el piso activo
+  const [activeTab, setActiveTab] = useState("pharmacy-supplies")
+  const [activeFloor, setActiveFloor] = useState(0)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedDate, setSelectedDate] = useState(new Date())
 
@@ -32,6 +33,16 @@ export default function NursingModule() {
 
       <div className="w-full">
         <div className="flex border-b border-gray-200 mb-6">
+          <button
+            onClick={() => setActiveTab("pharmacy-supplies")}
+            className={`px-4 py-2 font-medium text-sm border-b-2 transition-colors ${
+              activeTab === "pharmacy-supplies"
+                ? "border-blue-500 text-blue-600"
+                : "border-transparent text-gray-500 hover:text-gray-700"
+            }`}
+          >
+            Farmacia - Suministros
+          </button>
           <button
             onClick={() => setActiveTab("floor-management")}
             className={`px-4 py-2 font-medium text-sm border-b-2 transition-colors ${
@@ -64,15 +75,14 @@ export default function NursingModule() {
           </button>
         </div>
 
-        {activeTab === "floor-management" && (
+        {activeTab === "pharmacy-supplies" && (
           <div className="space-y-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold">Distribución de Camas por Piso</h3>
+              <h3 className="text-lg font-semibold">Medicamentos Entregados a Enfermería</h3>
               <DatePicker date={selectedDate} setDate={setSelectedDate} />
             </div>
 
             <div className="w-full">
-              {/* Tabs para los pisos */}
               <div className="flex border-b border-gray-200 mb-4">
                 <button
                   onClick={() => setActiveFloor(0)}
@@ -106,7 +116,57 @@ export default function NursingModule() {
                 </button>
               </div>
 
-              {/* Contenido del piso activo */}
+              <PharmacySupplies
+                floorNumber={activeFloor}
+                nurseName={
+                  activeFloor === 0 ? "Carmen Enfermera" : activeFloor === 1 ? "Ana Rodríguez" : "María González"
+                }
+              />
+            </div>
+          </div>
+        )}
+
+        {activeTab === "floor-management" && (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold">Distribución de Camas por Piso</h3>
+              <DatePicker date={selectedDate} setDate={setSelectedDate} />
+            </div>
+
+            <div className="w-full">
+              <div className="flex border-b border-gray-200 mb-4">
+                <button
+                  onClick={() => setActiveFloor(0)}
+                  className={`px-4 py-2 font-medium text-sm border-b-2 transition-colors ${
+                    activeFloor === 0
+                      ? "border-blue-500 text-blue-600"
+                      : "border-transparent text-gray-500 hover:text-gray-700"
+                  }`}
+                >
+                  Planta Baja
+                </button>
+                <button
+                  onClick={() => setActiveFloor(1)}
+                  className={`px-4 py-2 font-medium text-sm border-b-2 transition-colors ${
+                    activeFloor === 1
+                      ? "border-blue-500 text-blue-600"
+                      : "border-transparent text-gray-500 hover:text-gray-700"
+                  }`}
+                >
+                  Primer Piso
+                </button>
+                <button
+                  onClick={() => setActiveFloor(2)}
+                  className={`px-4 py-2 font-medium text-sm border-b-2 transition-colors ${
+                    activeFloor === 2
+                      ? "border-blue-500 text-blue-600"
+                      : "border-transparent text-gray-500 hover:text-gray-700"
+                  }`}
+                >
+                  Segundo Piso
+                </button>
+              </div>
+
               <FloorBeds floorNumber={activeFloor} />
             </div>
           </div>

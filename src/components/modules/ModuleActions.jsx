@@ -1,20 +1,18 @@
 "use client"
 
-import { useState } from "react";
-import { modules } from "../../data/modules.js";
-import { useAuth } from "../../auth/AuthContext";
-import ComponentRenderer from "./ComponentRenderer";
-import NursingModule from "./nursing/nursing-module";
-
+import { useState } from "react"
+import { modules } from "../../data/modules.js"
+import { useAuth } from "../../auth/AuthContext"
+import ComponentRenderer from "./ComponentRenderer"
+import NursingModule from "./nursing/nursing-module"
+import PharmacyModule from "./pharmacy/pharmacy-module"
 
 const ModuleActions = ({ moduleId }) => {
-  const [activeComponent, setActiveComponent] = useState(null);
-  const [selectedAction, setSelectedAction] = useState(null);
-  const { hasModuleAccess, hasActionAccess, currentUser, getRoleDisplayName } =
-    useAuth();
+  const [activeComponent, setActiveComponent] = useState(null)
+  const [selectedAction, setSelectedAction] = useState(null)
+  const { hasModuleAccess, hasActionAccess, currentUser, getRoleDisplayName } = useAuth()
 
-  const module = modules.find((m) => m.id === moduleId);
-
+  const module = modules.find((m) => m.id === moduleId)
 
   if (!hasModuleAccess(moduleId)) {
     return (
@@ -35,6 +33,11 @@ const ModuleActions = ({ moduleId }) => {
   // Special case for nursing module
   if (moduleId === "nursing") {
     return <NursingModule />
+  }
+
+  // Special case for pharmacy module
+  if (moduleId === "pharmacy") {
+    return <PharmacyModule />
   }
 
   if (!module) {
@@ -66,23 +69,21 @@ const ModuleActions = ({ moduleId }) => {
   }
 
   const handleActionClick = (action) => {
-    setSelectedAction(action);
-    setActiveComponent(action.component || null);
-  };
+    setSelectedAction(action)
+    setActiveComponent(action.component || null)
+  }
 
   const handleBack = () => {
-    setActiveComponent(null);
-    setSelectedAction(null);
-  };
+    setActiveComponent(null)
+    setSelectedAction(null)
+  }
 
   if (activeComponent) {
     return (
       <div className="bg-white rounded-lg shadow-lg mx-8 my-6">
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-gray-800">
-              {selectedAction?.label}
-            </h2>
+            <h2 className="text-2xl font-bold text-gray-800">{selectedAction?.label}</h2>
             <button
               onClick={handleBack}
               className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
@@ -92,18 +93,14 @@ const ModuleActions = ({ moduleId }) => {
           </div>
         </div>
         <div className="p-6">
-          <ComponentRenderer
-            componentName={activeComponent}
-            action={selectedAction}
-            moduleId={moduleId}
-          />
+          <ComponentRenderer componentName={activeComponent} action={selectedAction} moduleId={moduleId} />
         </div>
       </div>
-    );
+    )
   }
 
-  const buttonsCount = accessibleActions.length;
-  const columnsPerRow = buttonsCount % 3 === 0 ? 3 : 4;
+  const buttonsCount = accessibleActions.length
+  const columnsPerRow = buttonsCount % 3 === 0 ? 3 : 4
 
   const gridClasses = `grid gap-6 mb-8 justify-items-center ${
     columnsPerRow === 3

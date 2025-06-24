@@ -9,7 +9,16 @@ export const ROLES = {
 
 export const ROLE_PERMISSIONS = {
   [ROLES.ADMINISTRADOR]: {
-    modules: ["personnel", "accounting", "users", "patients", "medical-consultations", "services", "nursing"],
+    modules: [
+      "personnel",
+      "accounting",
+      "users",
+      "patients",
+      "medical-consultations",
+      "services",
+      "nursing",
+      "pharmacy",
+    ],
     actions: {
       personnel: ["create", "list", "update", "delete"],
       accounting: [
@@ -27,6 +36,18 @@ export const ROLE_PERMISSIONS = {
       "medical-consultations": ["create", "list", "update", "delete"],
       services: ["create", "list", "update", "delete"],
       nursing: ["create", "list", "update", "delete"],
+      pharmacy: [
+        "import-apdesc",
+        "register-articles",
+        "modify-articles",
+        "advanced-search",
+        "inventory",
+        "sales-code",
+        "suppliers",
+        "sales-report",
+        "expiring-products",
+        "ticket-config",
+      ],
     },
   },
   [ROLES.RECEPCIONISTA]: {
@@ -44,13 +65,25 @@ export const ROLE_PERMISSIONS = {
     },
   },
   [ROLES.FARMACEUTICO]: {
-    modules: ["nursing"],
+    modules: ["pharmacy", "nursing"],
     actions: {
+      pharmacy: [
+        "import-apdesc",
+        "register-articles",
+        "modify-articles",
+        "advanced-search",
+        "inventory",
+        "sales-code",
+        "suppliers",
+        "sales-report",
+        "expiring-products",
+        "ticket-config",
+      ],
       nursing: ["create", "list", "update", "delete"],
     },
   },
   [ROLES.ENFERMERIA]: {
-    modules: ["nursing", "services"], 
+    modules: ["nursing", "services"],
     actions: {
       nursing: ["beds", "search", "observations", "print"],
       services: ["create", "list", "update"],

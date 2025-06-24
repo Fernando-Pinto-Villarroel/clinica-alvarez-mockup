@@ -13,6 +13,12 @@ import {
   Search,
   FileText,
   Printer,
+  Warehouse,
+  ShoppingCart,
+  Upload,
+  BarChart3,
+  AlertTriangle,
+  Settings,
 } from "lucide-react"
 
 export const modules = [
@@ -24,6 +30,23 @@ export const modules = [
       { id: "create", label: "Programar Servicio", icon: Plus, component: "ServiceForm" },
       { id: "update", label: "Editar Servicio Programado", icon: Edit, component: "ServiceList" },
       { id: "list", label: "Ver Servicios Programados", icon: List, component: "ServiceList" },
+    ],
+  },
+  {
+    id: "pharmacy",
+    title: "Farmacia",
+    icon: Pill,
+    actions: [
+      { id: "import-apdesc", label: "Importar datos de Apdesc (Excel)", icon: Upload },
+      { id: "register-articles", label: "Registrar Artículos", icon: Plus },
+      { id: "modify-articles", label: "Modificar Artículos", icon: Edit },
+      { id: "advanced-search", label: "Búsqueda Avanzada de Productos", icon: Search },
+      { id: "inventory", label: "Inventario", icon: Warehouse },
+      { id: "sales-code", label: "Código de ventas", icon: ShoppingCart },
+      { id: "suppliers", label: "Proveedores", icon: Users },
+      { id: "sales-report", label: "Reporte de ventas", icon: BarChart3 },
+      { id: "expiring-products", label: "Productos a punto de caducar", icon: AlertTriangle },
+      { id: "ticket-config", label: "Configuración de Ticket", icon: Settings },
     ],
   },
   {
@@ -152,4 +175,4 @@ export const modules = [
       },
     ],
   },
-];
+]

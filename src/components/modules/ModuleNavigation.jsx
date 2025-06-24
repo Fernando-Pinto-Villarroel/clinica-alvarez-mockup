@@ -7,6 +7,7 @@ const ModuleNavigation = ({ activeModule, onModuleChange }) => {
     { id: "accounting", label: "Contabilidad" },
     { id: "patients", label: "Pacientes" },
     { id: "services", label: "Servicios de la Clínica" },
+    { id: "pharmacy", label: "Farmacia" },
     { id: "nursing", label: "Enfermería" },
     { id: "medical-consultations", label: "Consultas Médicas" },
     { id: "personnel", label: "Gestión de Personal (RRHH)" },
